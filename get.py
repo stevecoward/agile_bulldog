@@ -1,12 +1,13 @@
 import urllib.request
 import json
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
 
-if __name__ == "__main__":
-    info = os.getenv("AWS_SECRET_KEY")
+def run():
+    info = os.getenv("AWS_SECRET_KEY", "NOT_EXIST")
 
     with open("output.log", "w", encoding="utf-8") as fh:
         fh.write(info)
@@ -28,3 +29,6 @@ if __name__ == "__main__":
     except urllib.error.HTTPError as e:
         print(f"Error: {e.code} - {e.read().decode()}")
 
+
+if __name__ == "__main__":
+    run()
